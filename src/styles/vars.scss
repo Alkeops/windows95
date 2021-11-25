@@ -1,0 +1,8 @@
+$background: teal;
+$window-header: navy;
+$silver: silver;
+$white: #efefef;
+
+@mixin borderWindow{
+    border-top: 2px solid var(--color-white);
+}
