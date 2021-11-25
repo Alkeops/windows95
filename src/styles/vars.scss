@@ -2,7 +2,42 @@ $background: teal;
 $window-header: navy;
 $silver: silver;
 $white: #efefef;
+$black: #000;
 
-@mixin borderWindow{
-    border-top: 2px solid var(--color-white);
+//Buttons
+$white-buttons: #ededed;
+$gray-buttons: #404040;
+
+@mixin borderWindow {
+  border: {
+    bottom: 2px solid var(--color-black);
+    left: 2px solid var(--color-white);
+    right: 2px solid var(--color-black);
+    top: 2px solid var(--color-white);
+  }
+}
+
+@mixin borderButton {
+  border: {
+    bottom: 2px solid var(--color-gray-buttons);
+    left: 2px solid var(--color-white-buttons);
+    right: 2px solid var(--color-gray-buttons);
+    top: 2px solid var(--color-white-buttons);
+  }
+}
+
+@mixin borderTitle{
+    border: {
+        bottom: 1px solid var(--color-silver);
+        left: 1px solid var(--color-silver);
+        right: 2px solid var(--color-silver);
+        top: 1px solid var(--color-silver);
+    }
+}
+
+@mixin flexible($flow, $gap){
+    display: grid;
+    grid-gap: $gap;
+    grid-auto-flow: $flow;
+    align-items: center;
 }

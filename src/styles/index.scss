@@ -1,20 +1,91 @@
 @import "./vars.scss";
-:root{
+:root {
   --color-background: #{$background};
   --color-window: #{$window-header};
   --color-silver: #{$silver};
   --color-white: #{$white};
+  --color-black: #{$black};
+  --color-white-buttons: #{$white-buttons};
+  --color-gray-buttons: #{$gray-buttons};
 }
-
-
-
-
-body{
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  &::selection {
+    background: none;
+    color: inherit;
+  }
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+.App {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  background: var(--color-background);
+}
+.barra-tareas {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 34px;
+  padding: 0 10px;
   background: var(--color-silver);
-  @include borderWindow;
+  border-top: 1px solid var(--color-white);
+  border-bottom: 1px solid var(--color-gray-buttons);
+  @include flexible(column, 10px);
+}
+
+.button {
+  box-shadow: inset 1px 1px #dfdfdf, 1px 0 #000, 0 1px #000, 1px 1px #000;
+  color: var(--color-black);
+  background: var(--color-silver);
+  width: max-content;
+  padding: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  @include borderButton;
+}
+
+.icons {
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 3px;
+  border: 1px dashed transparent;
+  &__title {
+    margin-top: 6px;
+    width: 80px;
+    text-align: center;
+    cursor: default;
+  }
+  &--active {
+    border-color: var(--color-silver);
+  }
+  &--drag-over {
+    border-color: var(--color-black);
+    background: var(--color-silver);
+  }
+}
+
+.icons-container {
+  height: max-content;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  > * {
+    margin: 14px;
+  }
 }
