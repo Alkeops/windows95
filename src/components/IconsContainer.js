@@ -10,7 +10,7 @@ const IconsContainer = ({ array = [], data, setData, setDesktop }) => {
     setInternalData(newData);
   }, [array]);
   return (
-    <div className={prefix}>
+    <div className={prefix} draggable={false}>
       {internalData.map((icon) => (
         <Icons
           {...icon}
