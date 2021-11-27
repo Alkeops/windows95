@@ -18,6 +18,7 @@ const Icons = ({
   idSelected,
   setDesktop,
   setIdSelected,
+  setFolderSelected,
   ...props
 }) => {
   const [active, setActive] = useState(false);
@@ -43,6 +44,7 @@ const Icons = ({
         setIdSelected(id);
         setActive(true);
       }}
+      onDoubleClick={type.includes("folder") ? () => setFolderSelected(id) : null}
       onDrop={
         type.includes("folder") && idSelected !== id
           ? () => {

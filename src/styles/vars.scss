@@ -8,6 +8,9 @@ $black: #000;
 $white-buttons: #ededed;
 $gray-buttons: #404040;
 
+//Fonts
+$font-primary: "Montserrat", sans-serif;
+
 @mixin borderWindow {
   border: {
     bottom: 2px solid var(--color-black);
@@ -26,18 +29,18 @@ $gray-buttons: #404040;
   }
 }
 
-@mixin borderTitle{
-    border: {
-        bottom: 1px solid var(--color-silver);
-        left: 1px solid var(--color-silver);
-        right: 2px solid var(--color-silver);
-        top: 1px solid var(--color-silver);
-    }
+@mixin borderTitle {
+  border: {
+    bottom: 1px solid var(--color-silver);
+    left: 1px solid var(--color-silver);
+    right: 2px solid var(--color-silver);
+    top: 1px solid var(--color-silver);
+  }
 }
 
-@mixin flexible($flow, $gap){
-    display: grid;
-    grid-gap: $gap;
-    grid-auto-flow: $flow;
-    align-items: center;
+@mixin flexible($flow, $gap) {
+  display: grid;
+  grid-gap: $gap;
+  grid-auto-flow: $flow;
+  align-items: center;
 }

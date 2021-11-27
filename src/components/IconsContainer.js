@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Icons from "./Icons";
 const prefix = "icons-container";
-const IconsContainer = ({ array = [], data, setData, setDesktop }) => {
+const IconsContainer = ({
+  array = [],
+  data,
+  setData,
+  setDesktop,
+  setFolderSelected,
+}) => {
   const [internalData, setInternalData] = useState([]);
   const [idSelected, setIdSelected] = useState("");
   useEffect(() => {
@@ -20,6 +26,7 @@ const IconsContainer = ({ array = [], data, setData, setDesktop }) => {
           idSelected={idSelected}
           setIdSelected={setIdSelected}
           setDesktop={setDesktop}
+          setFolderSelected={setFolderSelected}
         />
       ))}
     </div>

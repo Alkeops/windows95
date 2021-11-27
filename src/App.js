@@ -1,6 +1,7 @@
 import BarraTareas from "./components/BarraTareas";
 import IconsContainer from "./components/IconsContainer";
 import { useState, useEffect } from "react";
+import Window from "./components/Window";
 
 const fakeData = [
   { type: "recycle", title: "Recycle bin", id: "rcp1", content: [] },
@@ -47,17 +48,32 @@ function App() {
     "car6",
   ]);
   const [data, setData] = useState(fakeData);
+  const [folderSelected, setFolderSelected] = useState(null);
+  const [folderData, setFolderData] = useState({});
   useEffect(() => {
     console.log(data);
   }, [data]);
+  useEffect(() => {
+    if (folderSelected) {
+      return setFolderData(data.find((folder) => folder.id === folderSelected));
+    }
+    setFolderData({});
+  }, [folderSelected]);
   return (
     <div className="App">
-      <BarraTareas />
+      <BarraTareas folderData={folderData} />
       <IconsContainer
         array={desktop}
         data={data}
         setData={setData}
         setDesktop={setDesktop}
+        setFolderSelected={setFolderSelected}
+      />
+      <Window
+        folderData={folderData}
+        setFolderSelected={setFolderSelected}
+        data={data}
+        setData={setData}
       />
     </div>
   );
