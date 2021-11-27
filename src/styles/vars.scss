@@ -38,6 +38,15 @@ $font-primary: "Montserrat", sans-serif;
   }
 }
 
+@mixin borderFolderOpen {
+  border: {
+    right: 1px solid var(--color-white);
+    bottom: 1px solid var(--color-white);
+    top: 1px solid var(--color-black);
+    left: 1px solid var(--color-black);
+  }
+}
+
 @mixin flexible($flow, $gap) {
   display: grid;
   grid-gap: $gap;

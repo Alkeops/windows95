@@ -44,7 +44,12 @@ const Icons = ({
         setIdSelected(id);
         setActive(true);
       }}
-      onDoubleClick={type.includes("folder") ? () => setFolderSelected(id) : null}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" && type.includes("folder")) setFolderSelected(id);
+      }}
+      onDoubleClick={
+        type.includes("folder") ? () => setFolderSelected(id) : null
+      }
       onDrop={
         type.includes("folder") && idSelected !== id
           ? () => {

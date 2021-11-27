@@ -52,10 +52,14 @@
   }
   &__folder-open{
     cursor: pointer;
-    @include borderButton;
+    @include borderFolderOpen;
     padding: 4px 10px;
     font-size: 14px;
     font-weight: 600;
+    box-shadow:  inset 1px 1px grey;
+    span{
+      margin-left: 10px;
+    }
   }
 }
 
@@ -67,7 +71,13 @@
   padding: 4px;
   font-weight: 500;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @include borderButton;
+  img{
+    margin-right: 10px;
+  }
 }
 
 .icons {
