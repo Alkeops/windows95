@@ -16,7 +16,7 @@ const IconsContainer = ({
     setInternalData(newData);
   }, [array]);
   return (
-    <div className={prefix}>
+    <div className={prefix} draggable={false}>
       {internalData.map((icon) => (
         <Icons
           {...icon}
