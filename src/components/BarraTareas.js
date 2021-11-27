@@ -1,11 +1,12 @@
 import React from "react";
 import { Button } from "./common";
 import { AiOutlineFolder } from "react-icons/ai";
-import { SiWindows95 } from "react-icons/si";
 import icon from "./assets/windows-icon.png";
+import { useApiContext } from "../context/Api/Api.context";
 const prefix = "barra-tareas";
 
-const BarraTareas = ({ folderData }) => {
+const BarraTareas = () => {
+  const { window } = useApiContext();
   return (
     <div className={prefix}>
       <div className={`${prefix}__content`}>
@@ -14,10 +15,10 @@ const BarraTareas = ({ folderData }) => {
           content="Start"
           onClick={() => alert("start")}
         />
-        {folderData?.title ? (
+        {window?.data?.title ? (
           <div className={`${prefix}__folder-open`}>
             <AiOutlineFolder />
-            <span>{folderData.title}</span>
+            <span>{window.data.title}</span>
           </div>
         ) : null}{" "}
       </div>

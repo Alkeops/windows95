@@ -6,6 +6,8 @@ import fileDoc from "./assets/file-doc.png";
 import recycleBin from "./assets/recycle_bin_empty-4.png";
 import recycleBinFull from "./assets/recycle_bin_full-2.png";
 import img from "./assets/color_profile-0.png";
+import { useApiContext } from "../context/Api/Api.context";
+import { useAppContext } from "../context/App/App.context";
 
 const prefix = "icons";
 
@@ -13,16 +15,12 @@ const Icons = ({
   type = "recycle",
   title,
   id,
-  data,
-  setData,
-  idSelected,
-  setDesktop,
-  setIdSelected,
-  setFolderSelected,
   ...props
 }) => {
   const [active, setActive] = useState(false);
   const [dragOver, setDragOver] = useState(false);
+  const { updateData } = useApiContext();
+  const { selectFile, selectFolder, fileSelected } = useAppContext();
   const classForComponent = cn(prefix, {
     [`${prefix}--active`]: active,
     [`${prefix}--drag-over`]: dragOver,
@@ -41,7 +39,7 @@ const Icons = ({
       tabIndex={0}
       draggable={!type.includes("recycle")}
       onDragStart={() => {
-        setIdSelected(id);
+        selectFile(id);
         setActive(true);
         //onDragStart se detona en el momento en que se empieza a arrastar el elemento.
       }}
@@ -50,29 +48,27 @@ const Icons = ({
         //onKeyPress se detona cuando se presiona una tecla, pero solo si la tecla es de "caracter"
         //onKeyUp se detona cuando se suelta una tecla
         //console.log(e)
-        if (e.key === "Enter" && type.includes("folder")) setFolderSelected(id);
+        if (e.key === "Enter" && type.includes("folder")) selectFolder(id);
       }}
       onDoubleClick={
-        type.includes("folder") ? () => setFolderSelected(id) : null
+        type.includes("folder") ? () => selectFolder(id) : null
         //onDoubleClick se detona cuando el usuario hace doble click en el elemento
       }
       onDrop={
         //onDrop se detona cuando estas "arrastrando" un elemento y lo sueltas en el elemento
-        type.includes("folder") && idSelected !== id
+        type.includes("folder") && fileSelected !== id
           ? () => {
-              const element = data.find((item) => item.id === id);
-              element.content = [...element.content, idSelected];
-              console.log({ element, idSelected });
-              setDesktop((p) => [...p.filter((item) => item !== idSelected)]);
-              setData([...data.filter((item) => item.id !== id), element]);
+              //actualizar id, fileSelected
+              updateData({ id, idChild: fileSelected });
               setActive(false);
               setDragOver(false);
+              selectFile(null);
             }
           : null
       }
       onDragOver={
         //onDragOver se detona cuando pasas por encima del elemento con un elemento arrastrado
-        type.includes("folder") && idSelected !== id
+        type.includes("folder") && fileSelected !== id
           ? (e) => {
               e.preventDefault();
               setDragOver(true);
@@ -89,6 +85,9 @@ const Icons = ({
             }
           : null
       }
+      onDragEnd={() => {
+        selectFile(null);
+      }}
       /*  onClick={() => setActive(true)} */
       onFocus={
         //onFocus se detona cuando haces "foco" aun elemento

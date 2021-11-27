@@ -1,30 +1,39 @@
-import React, { useRef, useLayoutEffect } from "react";
+import React, { useRef, useLayoutEffect, useEffect } from "react";
+import { useApiContext } from "../context/Api/Api.context";
+import { useAppContext } from "../context/App/App.context";
 import { Button } from "./common";
 import IconsContainer from "./IconsContainer";
 const prefix = "window";
-const Window = ({ folderData, setFolderSelected, data, setData }) => {
+const Window = () => {
   const windowRef = useRef(null);
+  const { folderSelected, selectFolder } = useAppContext();
+  const { window, searchWindow } = useApiContext();
   useLayoutEffect(() => {
     if (windowRef.current) {
       windowRef.current.focus();
     }
   });
-  if (!Object.keys(folderData).length) return false;
+  useEffect(() => {
+    if (folderSelected) {
+      searchWindow(folderSelected);
+    }
+  }, [folderSelected]);
+  if (!folderSelected) return false;
   return (
     <div className={prefix}>
       <div
         className={`${prefix}__window`}
         tabIndex={0}
         onKeyDown={(e) => {
-          if (e.key === "Escape") setFolderSelected(null);
+          if (e.key === "Escape") selectFolder(null);
         }}
         ref={windowRef}
       >
         <div className={`${prefix}__window-header`}>
-          <span className={`${prefix}__title`}>{folderData.title}</span>
+          <span className={`${prefix}__title`}>{window.data.title}</span>
           <Button
             content="x"
-            onClick={() => setFolderSelected(null)}
+            onClick={() => selectFolder(null)}
             style={{
               height: 15,
               width: 15,
@@ -34,13 +43,7 @@ const Window = ({ folderData, setFolderSelected, data, setData }) => {
             }}
           ></Button>
         </div>
-        <IconsContainer
-          array={folderData?.content || []}
-          data={data}
-          setData={setData}
-          setFolderSelected={setFolderSelected}
-          setDesktop={() => {}}
-        />
+        <IconsContainer array={window?.content} />
       </div>
     </div>
   );
