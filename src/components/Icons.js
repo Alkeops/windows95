@@ -43,14 +43,21 @@ const Icons = ({
       onDragStart={() => {
         setIdSelected(id);
         setActive(true);
+        //onDragStart se detona en el momento en que se empieza a arrastar el elemento.
       }}
       onKeyDown={(e) => {
+        //onKeyDown se detona en el momento en que se presiona una tecla, de cualquier tipo
+        //onKeyPress se detona cuando se presiona una tecla, pero solo si la tecla es de "caracter"
+        //onKeyUp se detona cuando se suelta una tecla
+        //console.log(e)
         if (e.key === "Enter" && type.includes("folder")) setFolderSelected(id);
       }}
       onDoubleClick={
         type.includes("folder") ? () => setFolderSelected(id) : null
+        //onDoubleClick se detona cuando el usuario hace doble click en el elemento
       }
       onDrop={
+        //onDrop se detona cuando estas "arrastrando" un elemento y lo sueltas en el elemento
         type.includes("folder") && idSelected !== id
           ? () => {
               const element = data.find((item) => item.id === id);
@@ -64,6 +71,7 @@ const Icons = ({
           : null
       }
       onDragOver={
+        //onDragOver se detona cuando pasas por encima del elemento con un elemento arrastrado
         type.includes("folder") && idSelected !== id
           ? (e) => {
               e.preventDefault();
@@ -74,14 +82,23 @@ const Icons = ({
             }
       }
       onDragLeave={
+        //onDragLeave se detona cuando estando encima con un elemento arrastrado, sales de el
         type.includes("folder")
           ? () => {
               setDragOver(false);
             }
           : null
       }
-      onClick={() => setActive(true)}
-      onBlur={() => setActive(false)}
+      /*  onClick={() => setActive(true)} */
+      onFocus={
+        //onFocus se detona cuando haces "foco" aun elemento
+        () => setActive(true)
+      }
+      onBlur={
+        //onBlur se detona cuando se pierde el "foco" del elemento
+        () => setActive(false)
+      }
+      onContextMenu={() => {}}
       {...props}
     >
       <img
