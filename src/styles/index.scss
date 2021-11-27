@@ -98,6 +98,9 @@
   }
   &--active {
     border-color: var(--color-silver);
+    .window & {
+      border-color: var(--color-white);
+    }
   }
   &--drag-over {
     border-color: var(--color-black);
