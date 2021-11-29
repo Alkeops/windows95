@@ -52,6 +52,7 @@ const Icons = ({
         //console.log(e)
         if (e.key === "Enter" && type.includes("folder")) setFolderSelected(id);
       }}
+      /* onMouseMove={(e) => console.log({ mouseMove: e })} */
       onDoubleClick={
         type.includes("folder") ? () => setFolderSelected(id) : null
         //onDoubleClick se detona cuando el usuario hace doble click en el elemento
@@ -89,11 +90,14 @@ const Icons = ({
             }
           : null
       }
-      /*  onClick={() => setActive(true)} */
-      onFocus={
+      onClick={() => setActive(true)}
+      /*  onFocus={
         //onFocus se detona cuando haces "foco" aun elemento
-        () => setActive(true)
-      }
+        () => {
+          //alert("Focus")
+          setActive(true);
+        }
+      } */
       onBlur={
         //onBlur se detona cuando se pierde el "foco" del elemento
         () => setActive(false)

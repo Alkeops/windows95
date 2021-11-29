@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "./common";
 import { AiOutlineFolder } from "react-icons/ai";
-import { SiWindows95 } from "react-icons/si";
 import icon from "./assets/windows-icon.png";
 const prefix = "barra-tareas";
 
