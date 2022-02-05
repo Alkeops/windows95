@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import cn from "classnames";
 import folderClose from "./assets/folder-close.png";
 import folderOpen from "./assets/folder-open.png";
@@ -11,7 +11,7 @@ import { useAppContext } from "../context/App/App.context";
 
 const prefix = "icons";
 
-const Icons = ({
+const Icons = memo(({
   type = "recycle",
   title,
   id,
@@ -111,6 +111,6 @@ const Icons = ({
       </span>
     </div>
   );
-};
+});
 
 export default Icons;
